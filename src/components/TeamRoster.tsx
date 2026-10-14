@@ -1,11 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { 
   Crown, 
   Sparkles, 
   Zap, 
   Star,
   CheckCircle2,
-  Users
+  Users,
+  X
 } from 'lucide-react'
 
 interface TeamMember {
@@ -144,8 +145,29 @@ export function TeamRoster() {
   const leaders = teamMembers.filter((m) => m.isLeadership)
   const members = teamMembers.filter((m) => !m.isLeadership)
 
+  const closeModal = useCallback(() => {
+    setSelectedMember(null)
+  }, [])
+
+  // Keyboard Escape listener & scroll lock for member modal
+  useEffect(() => {
+    if (!selectedMember) return
+
+    document.body.style.overflow = 'hidden'
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeModal()
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [selectedMember, closeModal])
+
   return (
-    <section id="roster" className="relative py-24 px-6 sm:px-12 max-w-7xl mx-auto w-full">
+    <section id="roster" className="relative py-24 px-6 sm:px-12 max-w-7xl mx-auto w-full scroll-mt-20">
       {/* Background Ambient Glows */}
       <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none" />
@@ -156,7 +178,7 @@ export function TeamRoster() {
           <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
           <span>TEAM VELOCTIFY ROSTER</span>
         </div>
-        <h2 className="font-['Syne'] text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+        <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
           The Minds of <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">Veloctify</span>
         </h2>
         <p className="text-slate-300 text-sm sm:text-base mt-4 leading-relaxed font-light">
@@ -179,8 +201,16 @@ export function TeamRoster() {
           {leaders.map((leader) => (
             <div
               key={leader.id}
+              role="button"
+              tabIndex={0}
               onClick={() => setSelectedMember(leader)}
-              className="group relative cursor-pointer rounded-3xl p-1 bg-gradient-to-b from-cyan-500/30 via-slate-800/40 to-slate-900/60 hover:from-cyan-400/60 hover:via-blue-500/40 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(6,182,212,0.25)]"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  setSelectedMember(leader)
+                }
+              }}
+              className="group relative cursor-pointer rounded-3xl p-1 bg-gradient-to-b from-cyan-500/30 via-slate-800/40 to-slate-900/60 hover:from-cyan-400/60 hover:via-blue-500/40 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(6,182,212,0.25)] focus:outline-none focus:ring-2 focus:ring-cyan-400"
             >
               {/* Outer ambient glow */}
               <div 
@@ -196,7 +226,7 @@ export function TeamRoster() {
                     <div className="relative">
                       {/* Monogram Emblem */}
                       <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-900 to-[#030712] border-2 border-cyan-400/50 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.3)] group-hover:scale-105 transition-transform duration-300">
-                        <span className="font-['Syne'] font-extrabold text-xl text-white tracking-wider">
+                        <span className="font-display font-extrabold text-xl text-white tracking-wider">
                           {leader.initials}
                         </span>
                       </div>
@@ -208,19 +238,19 @@ export function TeamRoster() {
                     {/* Role Pill (Captain or Vice Captain) */}
                     <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-400/60 shadow-[0_0_12px_rgba(6,182,212,0.3)]">
                       <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                      <span className="font-mono text-[11px] font-bold text-cyan-300 tracking-wider uppercase">
+                      <span className="font-mono text-xs font-bold text-cyan-300 tracking-wider uppercase">
                         {leader.role}
                       </span>
                     </div>
                   </div>
 
                   {/* Name */}
-                  <h3 className="font-['Syne'] text-2xl font-extrabold text-white group-hover:text-cyan-200 transition-colors mb-2 tracking-tight">
+                  <h3 className="font-display text-2xl font-extrabold text-white group-hover:text-cyan-200 transition-colors mb-2 tracking-tight">
                     {leader.name}
                   </h3>
 
                   {/* Soft Skill Focus */}
-                  <div className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 mb-3 bg-cyan-950/40 px-2.5 py-1 rounded-md border border-cyan-500/20">
+                  <div className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan-400 mb-3 bg-cyan-950/40 px-2.5 py-1 rounded-md border border-cyan-500/20 font-medium">
                     <Zap className="w-3 h-3" />
                     <span>{leader.softSkillSuperpower}</span>
                   </div>
@@ -232,7 +262,7 @@ export function TeamRoster() {
 
                 {/* Bottom Footer Accent */}
                 <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-slate-500">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400 font-medium">
                     Lead Vanguard
                   </span>
                   <span className="text-cyan-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 font-medium">
@@ -246,7 +276,7 @@ export function TeamRoster() {
         </div>
       </div>
 
-      {/* SYNDICATE CORE MEMBERS: 5 MEMBERS (STRICTLY NO ROLES) */}
+      {/* SYNDICATE CORE MEMBERS: 5 MEMBERS */}
       <div>
         <div className="flex items-center justify-center gap-3 mb-8">
           <div className="h-px w-12 bg-gradient-to-r from-transparent to-slate-700" />
@@ -262,15 +292,23 @@ export function TeamRoster() {
           {members.map((member) => (
             <div
               key={member.id}
+              role="button"
+              tabIndex={0}
               onClick={() => setSelectedMember(member)}
-              className="group relative cursor-pointer rounded-2xl p-0.5 bg-gradient-to-b from-slate-800/80 via-slate-900 to-slate-950 hover:from-cyan-500/50 hover:to-blue-600/30 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_15px_30px_rgba(0,0,0,0.7)] flex flex-col"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  setSelectedMember(member)
+                }
+              }}
+              className="group relative cursor-pointer rounded-2xl p-0.5 bg-gradient-to-b from-slate-800/80 via-slate-900 to-slate-950 hover:from-cyan-500/50 hover:to-blue-600/30 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_15px_30px_rgba(0,0,0,0.7)] flex flex-col focus:outline-none focus:ring-2 focus:ring-cyan-400"
             >
               <div className="relative rounded-[15px] p-5 bg-slate-950/85 border border-slate-800/80 group-hover:border-cyan-500/40 backdrop-blur-md h-full flex flex-col justify-between">
                 <div>
                   {/* Monogram Crest with Cyber Halo */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-900 via-slate-950 to-[#030712] border border-cyan-500/30 group-hover:border-cyan-400 flex items-center justify-center shadow-md group-hover:scale-105 transition-all">
-                      <span className="font-['Syne'] font-extrabold text-base text-white tracking-wider group-hover:text-cyan-300 transition-colors">
+                      <span className="font-display font-extrabold text-base text-white tracking-wider group-hover:text-cyan-300 transition-colors">
                         {member.initials}
                       </span>
                     </div>
@@ -278,8 +316,8 @@ export function TeamRoster() {
                     <div className="w-2 h-2 rounded-full bg-cyan-400/60 group-hover:bg-cyan-400 group-hover:animate-ping transition-all" />
                   </div>
 
-                  {/* Name — Bold & Clean, NO ROLES */}
-                  <h4 className="font-['Syne'] text-base sm:text-lg font-bold text-white group-hover:text-cyan-200 transition-colors mb-2 tracking-tight">
+                  {/* Name */}
+                  <h4 className="font-display text-base sm:text-lg font-bold text-white group-hover:text-cyan-200 transition-colors mb-2 tracking-tight">
                     {member.name}
                   </h4>
 
@@ -288,15 +326,15 @@ export function TeamRoster() {
                     {member.softSkillSuperpower}
                   </div>
 
-                  <p className="text-xs text-slate-400 font-light leading-relaxed line-clamp-3">
+                  <p className="text-xs text-slate-300/90 font-light leading-relaxed line-clamp-3">
                     {member.traitDescription}
                   </p>
                 </div>
 
-                {/* Subtle bottom indicator */}
-                <div className="mt-5 pt-3 border-t border-slate-850 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                {/* Bottom indicator */}
+                <div className="mt-5 pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                   <span>Team Member</span>
-                  <span className="text-cyan-400 group-hover:translate-x-1 transition-transform">
+                  <span className="text-cyan-400 group-hover:translate-x-1 transition-transform font-medium">
                     View Focus →
                   </span>
                 </div>
@@ -311,8 +349,9 @@ export function TeamRoster() {
         <div
           role="dialog"
           aria-modal="true"
+          aria-label={`${selectedMember.name} Details`}
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl animate-in fade-in duration-200"
-          onClick={() => setSelectedMember(null)}
+          onClick={closeModal}
         >
           <div
             className="relative max-w-lg w-full rounded-3xl p-7 bg-slate-950 border-2 border-cyan-400/50 shadow-[0_0_50px_rgba(6,182,212,0.35)]"
@@ -321,12 +360,12 @@ export function TeamRoster() {
             <div className="flex items-start justify-between mb-5">
               <div className="flex items-center gap-3">
                 <div className="w-14 h-14 rounded-2xl bg-slate-900 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.4)]">
-                  <span className="font-['Syne'] text-xl font-black text-white">
+                  <span className="font-display text-xl font-black text-white">
                     {selectedMember.initials}
                   </span>
                 </div>
                 <div>
-                  <h3 className="font-['Syne'] text-2xl font-bold text-white">
+                  <h3 className="font-display text-2xl font-bold text-white">
                     {selectedMember.name}
                   </h3>
                   {selectedMember.role ? (
@@ -343,17 +382,17 @@ export function TeamRoster() {
               </div>
 
               <button
-                onClick={() => setSelectedMember(null)}
-                className="p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                onClick={closeModal}
+                className="p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
                 aria-label="Close details"
               >
-                ✕
+                <X className="w-5 h-5" />
               </button>
             </div>
 
             <div className="space-y-4 pt-2">
               <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
-                <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-wider block mb-1">
+                <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-wider block mb-1 font-semibold">
                   Soft Skills Contribution
                 </span>
                 <p className="text-sm font-semibold text-white">
@@ -362,7 +401,7 @@ export function TeamRoster() {
               </div>
 
               <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
-                <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-wider block mb-1">
+                <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-wider block mb-1 font-semibold">
                   Syndicate Impact
                 </span>
                 <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">

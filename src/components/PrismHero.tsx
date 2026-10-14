@@ -570,7 +570,7 @@ export function PrismHero({
       ref={sectionRef}
       className={[
         "relative w-full",
-        isStatic ? "h-screen" : "h-[220vh]",
+        isStatic ? "h-screen" : "h-[140vh]",
         className,
       ]
         .filter(Boolean)

@@ -1,6 +1,7 @@
 import { Navbar } from './components/Navbar'
 import { PrismHero } from './components/PrismHero'
 import { TeamGallery } from './components/TeamGallery'
+import { TeamRoster } from './components/TeamRoster'
 import { 
   Sparkles, 
   Flame, 
@@ -162,6 +163,9 @@ export function App() {
 
       {/* Official Team Squad Showcase & Moments */}
       <TeamGallery />
+
+      {/* Syndicate Roster & Member Highlights */}
+      <TeamRoster />
 
       {/* Vision & Core Pillars Preview Section */}
       <section id="pillars" className="relative py-20 px-6 sm:px-12 max-w-7xl mx-auto w-full">

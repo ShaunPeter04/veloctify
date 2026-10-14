@@ -64,7 +64,13 @@ export function Navbar() {
             href="#team"
             className="px-3.5 py-1 text-xs font-medium text-slate-300 hover:text-cyan-300 hover:bg-cyan-950/40 rounded-full transition-all duration-200"
           >
-            Squad Showcase
+            Squad Photo
+          </a>
+          <a
+            href="#roster"
+            className="px-3.5 py-1 text-xs font-medium text-slate-300 hover:text-cyan-300 hover:bg-cyan-950/40 rounded-full transition-all duration-200"
+          >
+            Members
           </a>
           <a
             href="#pillars"
@@ -121,7 +127,14 @@ export function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
             className="text-sm font-medium text-slate-300 hover:text-cyan-400"
           >
-            Squad Showcase (6 Members)
+            Squad Photo Showcase
+          </a>
+          <a
+            href="#roster"
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-sm font-medium text-cyan-300 hover:text-cyan-200"
+          >
+            Team Members (7)
           </a>
           <a
             href="#pillars"

@@ -118,11 +118,11 @@ export function App() {
             </div>
 
             <h2 className="font-['Syne'] text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Forged in <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">Fire & Ice</span>, Driven by Velocity.
+              When Ideas <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">Gain Momentum.</span>
             </h2>
 
             <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
-              Our emblem portrays the fierce Azure Dragon entwined with the dimensional letter <strong className="text-white font-medium">“V”</strong>. Created exclusively for our soft skills capstone, it reflects our conviction that technical mastery without interpersonal velocity remains dormant.
+              At <strong className="text-white font-medium">Veloctify</strong>, our emblem portrays the fierce Azure Dragon entwined with the dimensional letter <strong className="text-white font-medium">“V”</strong>. Created exclusively for our soft skills capstone, it reflects our conviction that technical brilliance only thrives when interpersonal synergy gives it unstoppable momentum.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">

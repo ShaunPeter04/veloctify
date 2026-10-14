@@ -11,8 +11,7 @@ import {
   Users2, 
   ShieldCheck, 
   ArrowRight, 
-  Layers,
-  Award,
+  Award, 
   ChevronDown
 } from 'lucide-react'
 import './App.css'
@@ -247,32 +246,6 @@ export function App() {
               </div>
             )
           })}
-        </div>
-      </section>
-
-      {/* Placeholder / Feedback Awaiting Callout Card */}
-      <section className="py-12 px-6 sm:px-12 max-w-5xl mx-auto w-full">
-        <div className="relative rounded-3xl p-8 sm:p-12 overflow-hidden bg-gradient-to-r from-cyan-950/40 via-slate-900/90 to-blue-950/40 border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.15)] text-center">
-          <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center text-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
-              <Layers className="w-6 h-6" />
-            </div>
-
-            <h3 className="font-['Syne'] text-2xl sm:text-3xl font-extrabold text-white">
-              Hero & Foundation Ready for Team Veloctify
-            </h3>
-
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              The 3D Prism Refraction Hero, Dragon emblem, custom aesthetic, and navigation structure are loaded and working smoothly. Tell me about your team members, project topic, or specific sections you’d like to add next, and we will bring the rest of the website to life!
-            </p>
-
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-cyan-300 font-mono text-xs mt-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-              <span>AWAITING YOUR NEXT INSTRUCTIONS FOR REMAINING SECTIONS</span>
-            </div>
-          </div>
         </div>
       </section>
 

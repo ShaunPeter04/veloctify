@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  font-family:'Outfit',sans-serif;
-  color:#252822;
-  background:#f7f7f2;
+  font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:18px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  color:var(--ink);
+  background:var(--page);
   font-synthesis:none;
   font-weight:400;
   color-scheme:light
@@ -42,7 +45,7 @@ button {
 
 ::selection {
   background:#d7dfb9;
-  color:#252822
+  color:var(--ink)
 }
 
 :focus-visible {
@@ -93,3 +96,27 @@ button svg,a svg {
 
 
 }
+
+:root {
+  --page:#f7f7f2; --ink:#252822; --header:#f7f7f2ee; --header-border:#25282215;
+  --link-hover:#75834e; --border-strong:#b8beac; --muted:#62695b;
+  --accent:#69754f; --dot:#a4b47c; --hover-surface:#dce4c7;
+  --image-surface:#d9dbd1; --label:#606b52; --strong:#353a30;
+  --border:#d9dcd1; --section:#eeefe7; --portrait:#dce1d3;
+  --portrait-1:#deded3; --portrait-2:#e5dfd4; --portrait-3:#d8dfd9;
+  --initials:#727f6159; --portrait-ring:#75836826; --initials-hover:#727f6190;
+  --portrait-label:#535b49; --focus:#5c694d; --mark:#b4bea0; --closing:#e5ead8;
+}
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --page:#171b16; --ink:#eeefe7; --header:#171b16ee; --header-border:#ffffff16;
+  --link-hover:#c2d6a2; --border-strong:#5e6a52; --muted:#b0b7a6;
+  --accent:#bccda0; --dot:#b7cb92; --hover-surface:#35412c;
+  --image-surface:#2d3529; --label:#b0bea0; --strong:#e0e6d6;
+  --border:#394231; --section:#20261d; --portrait:#323d2d;
+  --portrait-1:#3b3d30; --portrait-2:#403a2e; --portrait-3:#2e3c35;
+  --initials:#bfd0a78c; --portrait-ring:#b6cba73d; --initials-hover:#d1e0bb;
+  --portrait-label:#c6d3b7; --focus:#c2d0af; --mark:#667a52; --closing:#2a3523;
+}
+:root[data-theme="dark"] ::selection { background:#52663e; color:#fff; }
+:root[data-theme="dark"] :focus-visible { outline-color:#c2d6a2; }

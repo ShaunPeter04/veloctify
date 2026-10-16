@@ -1,6 +1,6 @@
 import joelPhoto from '../assets/team/joel.png'
 import annetPhoto from '../assets/team/annet.png'
-import ayyappaPhoto from '../assets/team/ayyappa.png'
+import ayyappaPhoto from '../assets/team/ayyappan.png'
 import shaunPhoto from '../assets/team/shaun.png'
 import sivaniPhoto from '../assets/team/sivani.png'
 import sajanaPhoto from '../assets/team/sajana.png'

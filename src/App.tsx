@@ -3,7 +3,7 @@ import { motion, MotionConfig, useScroll, AnimatePresence, useReducedMotion } fr
 import { ArrowDown, ArrowUpRight, Plus, Minus, Menu, X, ChevronLeft, ChevronRight, Sun, Moon } from 'lucide-react'
 import { ScrollImage } from './components/ScrollImage'
 import { teamMembers } from './data/team'
-import teamMainPhoto from './assets/team/team-main.jpg'
+import teamMainPhoto from './assets/team/team-main.png'
 import teamLogo from './assets/logo-transparent.png'
 import './App.css'
 

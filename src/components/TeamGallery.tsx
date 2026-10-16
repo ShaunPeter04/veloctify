@@ -27,7 +27,7 @@ const photos: TeamPhoto[] = [
     subtitle: 'The 7 Visionaries of Team Veloctify',
     tag: 'OFFICIAL SQUAD',
     description: 'United on stage in formal synergy, representing our collective commitment to leadership, empathy, and high-velocity teamwork.',
-    src: '/team/team-main.jpg',
+    src: '/team/team-main.png',
     isMain: true,
   },
   {
